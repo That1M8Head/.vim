@@ -2,16 +2,11 @@
 "" This file is not part of Vim.
 
 " vim-plug
-call plug#begin()
-Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'marrub--/vim-zscript'
-Plug 'mhinz/vim-startify'
-Plug 'jceb/vim-orgmode'
-call plug#end()
+if has('win32')
+    source ~\vimfiles\packages.vim
+else
+    source ~\.vim\packages.vim
+endif
 
 " GUI options
 if has("gui_running")
@@ -40,6 +35,8 @@ set cursorline
 set autoread
 syntax on
 filetype on
+let did_install_default_menus = 1
+let did_install_syntax_menu = 1
 
 " Leader key, because Doom Emacs muscle memory
 let mapleader = " "
@@ -61,12 +58,12 @@ nmap <leader>hh :help
 nmap <leader>w  <C-w>
 
 " Emacs-style bindings
-nmap <C-p> <up>
-nmap <C-n> <down>
-nmap <C-b> <left>
-nmap <C-f> <right>
-nmap <C-a> <home>
-nmap <C-e> <end>
+imap <C-p> <up>
+imap <C-n> <down>
+imap <C-b> <left>
+imap <C-f> <right>
+map <C-a> <home>
+map <C-e> <end>
 nmap <M-x> :
 imap <M-x> <ESC>:
 
@@ -82,6 +79,8 @@ vnoremap d "+d
 nmap <ESC> :echo "You're already in Normal mode."<CR>
 vmap <TAB> >
 vmap <S-TAB> <
+nmap <C-q> :Startify<CR>
+vnoremap <BS> d
 
 " Airline
 if !exists('g:airline_symbols')
@@ -107,4 +106,8 @@ let g:startify_lists = [
 	  \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	  \ { 'type': 'commands',  'header': ['   Commands']       },
 	  \ ]
+
+" Fullscreen
+nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+imap <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>i
 
