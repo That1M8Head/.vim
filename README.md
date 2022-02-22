@@ -4,7 +4,7 @@ This is a from-scratch Vim config.
 
 ## Installing
 ```sh
-git clone https://github.com/that1m8head/.vim.git
+git clone git@github.com:That1M8Head/.vim.git
 ```
 You should run `:PlugInstall` inside Vim after cloning the repo.
 
