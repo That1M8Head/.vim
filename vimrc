@@ -10,10 +10,9 @@ endif
 
 " GUI options
 if has("gui_running")
-    set guioptions-=l
-    set guioptions-=r
     set guioptions-=T
     set guioptions-=m
+    set guioptions=
 	colorscheme onedark
 endif
 
@@ -56,6 +55,7 @@ nmap <leader>bk :bw<CR>:echo "Buffer killed"<CR>
 nmap <leader>bK :bw!<CR>:echo "Buffer force killed"<CR> 
 nmap <leader>hh :help 
 nmap <leader>w  <C-w>
+nmap <leader>tt :NERDTreeToggle<CR>
 
 " Emacs-style bindings
 imap <C-p> <up>
@@ -92,20 +92,31 @@ let g:airline_symbols.colnr = ' C:'
 if has("gui_running")
 	let g:airline_theme='onedark'
 	let g:airline_left_sep = ''
-	let g:airline_left_alt_sep = ''
+	let g:airline_left_alt_sep = ''
 	let g:airline_right_sep = ''
-	let g:airline_right_alt_sep = ''
+	let g:airline_right_alt_sep = ''
 	let g:airline_symbols.readonly = 'locked'
 endif
 let g:airline_section_warning = ''
 
 " Startify
 let g:startify_lists = [
-	  \ { 'type': 'files',     'header': ['   Recent']         },
-	  \ { 'type': 'sessions',  'header': ['   Sessions']       },
-	  \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-	  \ { 'type': 'commands',  'header': ['   Commands']       },
-	  \ ]
+	\ { 'type': 'files',     'header': ['   Recent']         },
+	\ { 'type': 'sessions',  'header': ['   Sessions']       },
+	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+	\ { 'type': 'commands',  'header': ['   Commands']       },
+	\ ]
+if has("win32")
+    let g:startify_commands = [
+        \ { 'v': ['Edit vimrc', ':edit ~\vimfiles\vimrc'] },
+        \ { 'p': ['Manage vim-plug packages', ':edit ~\vimfiles\packages.vim'] }
+        \ ]
+else
+    let g:startify_commands = [
+        \ { 'v': ['Edit vimrc', ':edit ~\.vim\vimrc'] },
+        \ { 'p': ['Manage vim-plug packages', ':edit ~\.vim\packages.vim'] }
+        \ ]
+endif
 
 " Fullscreen
 nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
