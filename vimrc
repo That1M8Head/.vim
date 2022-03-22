@@ -11,7 +11,7 @@ endif
 "" Options
 
 " Colour scheme and font
-set guifont=Cascadia\ Code\ PL:h11
+set guifont=Cascadia\ Code\ PL\ 11
 colorscheme hatsunemiku
 
 " GUI options
@@ -140,7 +140,7 @@ let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.readonly = 'locked'
 let g:airline_section_warning = ''
-let g:airline_section_y = '%{strftime("%r")} %{strftime("%p")}'
+let g:airline_section_y = '%{strftime("%r")}'
 let g:airline_section_z = '%l:%c'
 
 "" Startify
