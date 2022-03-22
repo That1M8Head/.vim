@@ -22,4 +22,5 @@ call plug#begin()
     Plug '4513ECHO/vim-colors-hatsunemiku'
     Plug 'jreybert/vimagit'
     Plug 'cocopon/iceberg.vim'
+    Plug 'rust-lang/rust.vim'
 call plug#end()

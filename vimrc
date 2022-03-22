@@ -12,7 +12,7 @@ endif
 
 " Colour scheme and font
 set guifont=Cascadia\ Code\ PL:h11
-colorscheme gruvbox
+colorscheme hatsunemiku
 
 " GUI options
 if has("gui_running")
@@ -45,14 +45,18 @@ set t_Co=25
 
 "" Key bindings
 
-" Leader key, because Doom Emacs and qutebrowser muscle memory
+" Set <SPC> as leader key
 let mapleader = " "
 
-" Files
+" File saving
 nmap <leader>fs :w<CR>
 nmap <leader>fS :w 
+
+" Find files
 nmap <leader>ff :edit 
 nmap <leader>fr :browse oldfiles<CR>
+
+" Find private config
 if has('win32')
 	nmap <leader>fp :edit ~/vimfiles/vimrc<CR>
 	nmap <leader>fP :edit ~/vimfiles/<CR>
@@ -65,26 +69,48 @@ endif
 nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
-" Buffers
+" Vimium-style buffer switching
 nmap <leader>j  :bprevious<CR>
 nmap <leader>k  :bnext<CR>
+
+" Buffer kill
 nmap <leader>bk :bw<CR>
 nmap <leader>bK :bw!<CR>
+
+" Reload config (rc)
+if has('win32')
+    nmap <leader>rc :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>:source ~/vimfiles/vimrc<CR>q
+else
+    nmap <leader>rc :source ~/.vim/packages.vim<CR>:PlugInstall<CR>:source ~/.vim/vimrc<CR>q
+endif
 
 " Other leader bindings
 nmap <leader>hh :help 
 nmap <leader>w  <C-w>
-nmap <leader>tt :NERDTreeToggle<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>cs :colorscheme 
 
-" Emacs-style bindings
+"" Emacs-style bindings
+
+" Navigation
 imap <C-p> <up>
 imap <C-n> <down>
 imap <C-b> <left>
 imap <C-f> <right>
 imap <C-a> <home>
 imap <C-e> <end>
+
+" M-x
 nmap <M-x> :
 imap <M-x> <C-o>:
+
+" C-x shortcuts
+nmap <C-x><C-s> :w<CR>
+imap <C-x><C-s> <C-o>:w<CR>
+nmap <C-x><C-w> :w 
+imap <C-x><C-w> <C-o>:w 
+nmap <C-x><C-f> :w<CR>
+imap <C-x><C-f> <C-o>:w<CR>
 
 " Clipboard stuff
 nnoremap y "+y
@@ -95,12 +121,12 @@ nnoremap d "+d
 vnoremap d "+d
 
 " Fullscreen
-nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+if has("win32")
+    nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+    imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+endif
 
 " Other bindings
-vmap <TAB> >
-vmap <S-TAB> <
 nmap <C-q> :Startify<CR>
 vnoremap <BS> d
 

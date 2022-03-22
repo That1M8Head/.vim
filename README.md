@@ -1,15 +1,19 @@
 # Arsalan Kazmi's Vim config
 
-This is a from-scratch Vim config.
+This is a hand-crafted config for Vim, inspired by SpaceVim and DOOM Emacs.
+
+Leader key bindings take after DOOM Emacs, using mnemonics, and Emacs editing commands have been implemented.
 
 ## Installing
+
+### Not Windows
 ```sh
-git clone git@github.com:That1M8Head/.vim.git
+git clone git@github.com:That1M8Head/.vim.git ~/vimfiles
 ```
-You should run `:PlugInstall` inside Vim after cloning the repo.
+### Windows
+```sh
+git clone git@github.com:That1M8Head/.vim.git ~/.vim
+```
 
-If you're on Windows, make sure the repo is cloned to `vimfiles` instead of `.vim`.
+You should run `:PlugInstall` or `<SPC>rc` inside Vim after cloning the repo.
 
-## FAQ (only one of them)
-### Why make your own config over something like SpaceVim?
-Unlike Emacs, Vim actually has pretty good defaults. Configuring Vim from scratch is a *lot* easier than Emacs.
