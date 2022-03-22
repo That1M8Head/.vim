@@ -18,4 +18,8 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     Plug 'ap/vim-buftabline'
     Plug 'morhetz/gruvbox'
+    Plug 'jnurmine/Zenburn'
+    Plug '4513ECHO/vim-colors-hatsunemiku'
+    Plug 'jreybert/vimagit'
+    Plug 'cocopon/iceberg.vim'
 call plug#end()
