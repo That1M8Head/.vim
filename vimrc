@@ -1,8 +1,17 @@
 """ vimrc --- Arsalan Kazmi's Vim config
 "" This file is not part of Vim.
 
+"" Detect OS (technically the kernel if uname)
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
 "" vim-plug
-if has('win32')
+if g:os == "Windows"
     source ~/vimfiles/packages.vim
 else
     source ~/.vim/packages.vim
@@ -11,7 +20,11 @@ endif
 "" Options
 
 " Colour scheme and font
-set guifont=Cascadia\ Code\ PL\ 11
+if g:os == "Linux"
+    set guifont=Cascadia\ Code\ PL\ 11
+else
+    set guifont=Cascadia\ Code\ PL:h11
+endif
 colorscheme hatsunemiku
 
 " GUI options
@@ -37,11 +50,12 @@ set nobackup
 set cursorline
 set autoread
 set hidden
+set linebreak
 syntax on
 filetype on
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
-set t_Co=25
+set t_Co=256
 
 "" Key bindings
 
@@ -57,7 +71,7 @@ nmap <leader>ff :edit
 nmap <leader>fr :browse oldfiles<CR>
 
 " Find private config
-if has('win32')
+if g:os == "Windows"
 	nmap <leader>fp :edit ~/vimfiles/vimrc<CR>
 	nmap <leader>fP :edit ~/vimfiles/<CR>
 else
@@ -78,7 +92,7 @@ nmap <leader>bk :bw<CR>
 nmap <leader>bK :bw!<CR>
 
 " Reload config (rc)
-if has('win32')
+if g:os == "Windows"
     nmap <leader>rc :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>:source ~/vimfiles/vimrc<CR>q
 else
     nmap <leader>rc :source ~/.vim/packages.vim<CR>:PlugInstall<CR>:source ~/.vim/vimrc<CR>q
@@ -121,7 +135,7 @@ nnoremap d "+d
 vnoremap d "+d
 
 " Fullscreen
-if has("win32")
+if g:os == "Windows"
     nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
@@ -150,7 +164,7 @@ let g:startify_lists = [
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	\ { 'type': 'commands',  'header': ['   Commands']       },
 	\ ]
-if has("win32")
+if g:os == "Windows"
     let g:startify_commands = [
         \ { 'v': ['Edit vimrc', ':edit ~/vimfiles/vimrc'] },
         \ { 'p': ['Manage vim-plug packages', ':edit ~/vimfiles/packages.vim'] }
