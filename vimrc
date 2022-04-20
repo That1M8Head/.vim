@@ -21,11 +21,10 @@ endif
 
 " Colour scheme and font
 if g:os == "Linux"
-    set guifont=Cascadia\ Code\ PL\ 11
+    set guifont=Iosevka\ Extended\ 11
 else
-    set guifont=Cascadia\ Code\ PL:h11
+    set guifont=Iosevka\ Extended:h11
 endif
-colorscheme hatsunemiku
 
 " GUI options
 if has("gui_running")
@@ -51,6 +50,8 @@ set cursorline
 set autoread
 set hidden
 set linebreak
+set noshowmode
+set termguicolors
 syntax on
 filetype on
 let did_install_default_menus = 1
@@ -83,42 +84,53 @@ endif
 nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
-" Vimium-style buffer switching
-nmap <leader>j  :bprevious<CR>
-nmap <leader>k  :bnext<CR>
+" Buffer switching
+nmap <leader>j  :bnext<CR>
+nmap <leader>k  :bprevious<CR>
 
 " Buffer kill
 nmap <leader>bk :bw<CR>
 nmap <leader>bK :bw!<CR>
 
-" Reload config (rc)
+" Reload
 if g:os == "Windows"
-    nmap <leader>rc :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>:source ~/vimfiles/vimrc<CR>q
+    nmap <leader>rc :source ~/vimfiles/vimrc<CR>
 else
-    nmap <leader>rc :source ~/.vim/packages.vim<CR>:PlugInstall<CR>:source ~/.vim/vimrc<CR>q
+    nmap <leader>rc :source ~/.vim/vimrc<CR>
 endif
+if g:os == "Windows"
+    nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall
+else
+    nmap <leader>pp :source ~/.vim/packages.vim<CR>:PlugInstall
+endif
+if g:os == "Windows"
+    nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate
+else
+    nmap <leader>pu :source ~/.vim/packages.vim<CR>:PlugUpdate<CR>
+endif
+
+" NERDTree
+nmap <leader>nt :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR><C-w>l
 
 " Other leader bindings
 nmap <leader>hh :help 
 nmap <leader>w  <C-w>
-nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>cs :colorscheme 
 
 "" Emacs-style bindings
 
-" Navigation
 imap <C-p> <up>
 imap <C-n> <down>
 imap <C-b> <left>
 imap <C-f> <right>
 imap <C-a> <home>
 imap <C-e> <end>
+imap <C-d> <BS>
 
-" M-x
 nmap <M-x> :
 imap <M-x> <C-o>:
 
-" C-x shortcuts
 nmap <C-x><C-s> :w<CR>
 imap <C-x><C-s> <C-o>:w<CR>
 nmap <C-x><C-w> :w 
@@ -126,21 +138,30 @@ imap <C-x><C-w> <C-o>:w
 nmap <C-x><C-f> :w<CR>
 imap <C-x><C-f> <C-o>:w<CR>
 
-" Clipboard stuff
+imap <M-w> <C-o>"+Y
+imap <C-y> <C-o>"+p
+imap <C-k> <C-o>"+D
+
+nmap <M-=> g<C-g>
+
 nnoremap y "+y
 vnoremap y "+y
 nnoremap p "+p
 vnoremap p "+p
 nnoremap d "+d
 vnoremap d "+d
+nnoremap Y "+Y
+vnoremap Y "+Y
+nnoremap P "+P
+vnoremap P "+P
+nnoremap D "+D
+vnoremap D "+D
 
-" Fullscreen
-if g:os == "Windows"
+if has("win32")
     nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
 
-" Other bindings
 nmap <C-q> :Startify<CR>
 vnoremap <BS> d
 
@@ -154,7 +175,7 @@ let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.readonly = 'locked'
 let g:airline_section_warning = ''
-let g:airline_section_y = '%{strftime("%r")}'
+let g:airline_section_y = '%{strftime("%r")} %{strftime("%p")}'
 let g:airline_section_z = '%l:%c'
 
 "" Startify
@@ -176,4 +197,8 @@ else
         \ ]
 endif
 
-
+"" Encoding
+if !has('nvim')
+    set renderoptions=type:directx
+endif
+set encoding=UTF-8
