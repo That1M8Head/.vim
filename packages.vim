@@ -13,7 +13,7 @@ call plug#begin()
     Plug 'dracula/vim', {'as':'dracula'}
     Plug 'Raimondi/delimitMate'
     Plug 'ayu-theme/ayu-vim'
-    Plug 'sickill/vim-monokai'
+    Plug 'crusoexia/vim-monokai'
     Plug 'Yavor-Ivanov/airline-monokai-subtle.vim', {'as':'airline-monokai'}
     Plug 'preservim/nerdtree'
     Plug 'ap/vim-buftabline'
@@ -23,4 +23,11 @@ call plug#begin()
     Plug 'jreybert/vimagit'
     Plug 'cocopon/iceberg.vim'
     Plug 'rust-lang/rust.vim'
+    Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+    Plug 'francoiscabrol/ranger.vim'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'tomasiser/vim-code-dark'
+    Plug 'vim-latex/vim-latex'
+    Plug 'sthendev/mariana.vim'
+    Plug 'vim-scripts/softlight.vim'
 call plug#end()
