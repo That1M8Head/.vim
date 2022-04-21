@@ -99,12 +99,12 @@ else
     nmap <leader>rc :source ~/.vim/vimrc<CR>
 endif
 if g:os == "Windows"
-    nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall
+    nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>
 else
-    nmap <leader>pp :source ~/.vim/packages.vim<CR>:PlugInstall
+    nmap <leader>pp :source ~/.vim/packages.vim<CR>:PlugInstall<CR>
 endif
 if g:os == "Windows"
-    nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate
+    nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate<CR>
 else
     nmap <leader>pu :source ~/.vim/packages.vim<CR>:PlugUpdate<CR>
 endif
