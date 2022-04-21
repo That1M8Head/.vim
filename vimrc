@@ -20,6 +20,7 @@ endif
 "" Options
 
 " Colour scheme and font
+colorscheme hatsunemiku
 if g:os == "Linux"
     set guifont=Iosevka\ Extended\ 11
 else
