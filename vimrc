@@ -1,17 +1,8 @@
 """ vimrc --- Arsalan Kazmi's Vim config
 "" This file is not part of Vim.
 
-"" Detect OS (technically the kernel if uname)
-if !exists("g:os")
-    if has("win64") || has("win32") || has("win16")
-        let g:os = "Windows"
-    else
-        let g:os = substitute(system('uname'), '\n', '', '')
-    endif
-endif
-
 "" vim-plug
-if g:os == "Windows"
+if has('win32')
     source ~/vimfiles/packages.vim
 else
     source ~/.vim/packages.vim
@@ -20,12 +11,8 @@ endif
 "" Options
 
 " Colour scheme and font
-colorscheme hatsunemiku
-if g:os == "Linux"
-    set guifont=Iosevka\ Extended\ 11
-else
-    set guifont=Iosevka\ Extended:h11
-endif
+set guifont=Iosevka\ Extended:h11
+colorscheme gruvbox
 
 " GUI options
 if has("gui_running")
@@ -51,8 +38,6 @@ set cursorline
 set autoread
 set hidden
 set linebreak
-set noshowmode
-set termguicolors
 syntax on
 filetype on
 let did_install_default_menus = 1
@@ -73,50 +58,30 @@ nmap <leader>ff :edit
 nmap <leader>fr :browse oldfiles<CR>
 
 " Find private config
-if g:os == "Windows"
-	nmap <leader>fp :edit ~/vimfiles/vimrc<CR>
-	nmap <leader>fP :edit ~/vimfiles/<CR>
-else
-	nmap <leader>fp :edit ~/.vim/vimrc<CR>
-	nmap <leader>fP :edit ~/.vim/<CR>
-endif
+nmap <leader>fp :edit ~/vimfiles/vimrc<CR>
+nmap <leader>fP :edit ~/vimfiles/<CR>
 
 " Quitting
 nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
-" Buffer switching
-nmap <leader>j  :bnext<CR>
-nmap <leader>k  :bprevious<CR>
+" Vimium-style buffer switching
+nmap <leader>j  :bprevious<CR>
+nmap <leader>k  :bnext<CR>
 
 " Buffer kill
 nmap <leader>bk :bw<CR>
 nmap <leader>bK :bw!<CR>
 
 " Reload
-if g:os == "Windows"
-    nmap <leader>rc :source ~/vimfiles/vimrc<CR>
-else
-    nmap <leader>rc :source ~/.vim/vimrc<CR>
-endif
-if g:os == "Windows"
-    nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>
-else
-    nmap <leader>pp :source ~/.vim/packages.vim<CR>:PlugInstall<CR>
-endif
-if g:os == "Windows"
-    nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate<CR>
-else
-    nmap <leader>pu :source ~/.vim/packages.vim<CR>:PlugUpdate<CR>
-endif
-
-" NERDTree
-nmap <leader>nt :NERDTreeToggle<CR>
-nmap <leader>nf :NERDTreeFind<CR><C-w>l
+nmap <leader>rc :source ~/vimfiles/vimrc<CR>
+nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>
+nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate<CR>
 
 " Other leader bindings
 nmap <leader>hh :help 
 nmap <leader>w  <C-w>
+nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>cs :colorscheme 
 
 "" Emacs-style bindings
@@ -127,8 +92,6 @@ imap <C-b> <left>
 imap <C-f> <right>
 imap <C-a> <home>
 imap <C-e> <end>
-imap <C-d> <BS>
-cmap <C-g> <ESC>
 
 nmap <M-x> :
 imap <M-x> <C-o>:
@@ -187,7 +150,7 @@ let g:startify_lists = [
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	\ { 'type': 'commands',  'header': ['   Commands']       },
 	\ ]
-if g:os == "Windows"
+if has("win32")
     let g:startify_commands = [
         \ { 'v': ['Edit vimrc', ':edit ~/vimfiles/vimrc'] },
         \ { 'p': ['Manage vim-plug packages', ':edit ~/vimfiles/packages.vim'] }
@@ -200,7 +163,5 @@ else
 endif
 
 "" Encoding
-if !has('nvim')
-    set renderoptions=type:directx
-endif
+set renderoptions=type:directx
 set encoding=UTF-8
