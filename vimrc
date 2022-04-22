@@ -128,6 +128,7 @@ imap <C-f> <right>
 imap <C-a> <home>
 imap <C-e> <end>
 imap <C-d> <BS>
+cmap <C-g> <ESC>
 
 nmap <M-x> :
 imap <M-x> <C-o>:
