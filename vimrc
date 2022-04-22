@@ -94,6 +94,11 @@ nmap q          :q<CR>
 nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
+" Quitting terminal
+if has("nvim")
+    :tmap <Esc> <C-\><C-n>
+endif
+
 "## Buffer switching
 nmap <leader>j  :bnext<CR>
 nmap <leader>k  :bprevious<CR>
@@ -172,7 +177,7 @@ nmap <leader>cs :colorscheme
 nmap <C-q> :Startify<CR>
 vnoremap <BS> d
 if has("nvim")
-    nmap <leader>ot :term<CR>
+    nmap <leader>ot :terminal<CR>
 endif
 "# Airline
 if !exists('g:airline_symbols')
