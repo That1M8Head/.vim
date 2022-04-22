@@ -3,7 +3,8 @@
 
 " vim:fdm=expr:fdl=0:fde=getline(v\:lnum)=~'^"#'?'>'.(matchend(getline(v\:lnum),'"#*')-1)\:'='
 
-"# Detect OS (technically the kernel if uname)
+"# Functions
+"## Detect OS (technically the kernel if uname)
 if !exists("g:os")
     if has("win64") || has("win32") || has("win16")
         let g:os = "Windows"
@@ -12,7 +13,7 @@ if !exists("g:os")
     endif
 endif
 
-"# vim-plug
+"## vim-plug
 if g:os == "Windows"
     source ~/vimfiles/packages.vim
 else
@@ -21,22 +22,26 @@ endif
 
 "# Options
 
-" Colour scheme and font
-colorscheme dracula
+"# Colour scheme and font
+if has("nvim")
+    colorscheme catppuccin
+else
+    colorscheme dracula
+endif
 if g:os == "Linux"
     set guifont=Iosevka\ Extended\ 11
 else
     set guifont=Iosevka\ Extended:h11
 endif
 
-" GUI options
+"# GUI options
 if has("gui_running")
     set guioptions-=T
     set guioptions-=m
     set guioptions=
 endif
 
-" Tabs and indentation
+"# Tabs and indentation
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -45,7 +50,7 @@ set autoindent
 set cindent
 set modelineexpr
 
-" Other options
+"# Other options
 set nocompatible
 set number relativenumber
 set wildmenu
@@ -85,6 +90,7 @@ else
 endif
 
 "## Quitting
+nmap q          :q<CR>
 nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
@@ -97,6 +103,7 @@ nmap <leader>bd :bd<CR>
 nmap <leader>bD :bd!<CR>
 nmap <leader>bw :bw<CR>
 nmap <leader>bW :bw!<CR>
+
 "## Reload
 if g:os == "Windows"
     nmap <leader>rc :source ~/vimfiles/vimrc<CR>
@@ -163,6 +170,8 @@ vnoremap P "+P
 nnoremap D "+D
 vnoremap D "+D
 
+"## Other bindings
+
 if has("win32")
     nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
@@ -175,9 +184,10 @@ vnoremap <BS> d
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_left_sep = ''
+let g:airline_theme="dracula"
+let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
+let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.readonly = 'locked'
 let g:airline_section_warning = ''
@@ -203,7 +213,7 @@ else
         \ ]
 endif
 
-"# Encoding
+" Encoding
 if !has('nvim')
     set renderoptions=type:directx
 endif

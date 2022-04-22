@@ -30,4 +30,5 @@ call plug#begin()
     Plug 'vim-latex/vim-latex'
     Plug 'sthendev/mariana.vim'
     Plug 'vim-scripts/softlight.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
