@@ -31,4 +31,5 @@ call plug#begin()
     Plug 'sthendev/mariana.vim'
     Plug 'vim-scripts/softlight.vim'
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()

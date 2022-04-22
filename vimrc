@@ -4,7 +4,8 @@
 " vim:fdm=expr:fdl=0:fde=getline(v\:lnum)=~'^"#'?'>'.(matchend(getline(v\:lnum),'"#*')-1)\:'='
 
 "# Functions
-"## Detect OS (technically the kernel if uname)
+
+" Detect OS (technically the kernel if uname)
 if !exists("g:os")
     if has("win64") || has("win32") || has("win16")
         let g:os = "Windows"
@@ -13,7 +14,7 @@ if !exists("g:os")
     endif
 endif
 
-"## vim-plug
+" vim-plug
 if g:os == "Windows"
     source ~/vimfiles/packages.vim
 else
@@ -21,8 +22,7 @@ else
 endif
 
 "# Options
-
-"# Colour scheme and font
+"## Colour scheme and font
 if has("nvim")
     colorscheme catppuccin
 else
@@ -34,14 +34,14 @@ else
     set guifont=Iosevka\ Extended:h11
 endif
 
-"# GUI options
+"## GUI options
 if has("gui_running")
     set guioptions-=T
     set guioptions-=m
     set guioptions=
 endif
 
-"# Tabs and indentation
+"## Tabs and indentation
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -50,8 +50,8 @@ set autoindent
 set cindent
 set modelineexpr
 
-"# Other options
-set nocompatible
+"## Other options
+set mouse=a
 set number relativenumber
 set wildmenu
 set nobackup
@@ -61,14 +61,14 @@ set hidden
 set linebreak
 set noshowmode
 set termguicolors
+set t_Co=256
+set nocompatible
 syntax on
 filetype on
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
-set t_Co=256
 
 "# Key bindings
-
 "## Set <SPC> as leader key
 let mapleader = " "
 
@@ -123,15 +123,9 @@ endif
 
 "## NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
-nmap <leader>nf :NERDTreeFind<CR><C-w>l
-
-"## Other leader bindings
-nmap <leader>hh :help 
-nmap <leader>w  <C-w>
-nmap <leader>cs :colorscheme 
+nmap <leader>nf :NERDTreeFind<CR>
 
 "## Emacs-style bindings
-
 imap <C-p> <up>
 imap <C-n> <down>
 imap <C-b> <left>
@@ -170,16 +164,16 @@ vnoremap P "+P
 nnoremap D "+D
 vnoremap D "+D
 
+
 "## Other bindings
-
-if has("win32")
-    nmap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-    imap <F11> <C-o>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-endif
-
+nmap <leader>hh :help 
+nmap <leader>w  <C-w>
+nmap <leader>cs :colorscheme 
 nmap <C-q> :Startify<CR>
 vnoremap <BS> d
-
+if has("nvim")
+    nmap <leader>ot :term<CR>
+endif
 "# Airline
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -213,9 +207,9 @@ else
         \ ]
 endif
 
-" Encoding
+"# Encoding
 if !has('nvim')
     set renderoptions=type:directx
+    set encoding=UTF-8
 endif
-set encoding=UTF-8
 
