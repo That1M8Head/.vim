@@ -1,37 +1,18 @@
-" vimrc --- Arsalan Kazmi's Vim config
-" This file is not part of Vim.
+" init.vim --- Arsalan Kazmi's Neovim config
+" This file is not part of Neovim.
 
 " vim:fdm=expr:fdl=0:fde=getline(v\:lnum)=~'^"#'?'>'.(matchend(getline(v\:lnum),'"#*')-1)\:'='
 
-"# Functions
-
-" Detect OS (technically the kernel if uname)
-if !exists("g:os")
-    if has("win64") || has("win32") || has("win16")
-        let g:os = "Windows"
-    else
-        let g:os = substitute(system('uname'), '\n', '', '')
-    endif
-endif
-
-" vim-plug
-if g:os == "Windows"
-    source ~/vimfiles/packages.vim
-else
-    source ~/.vim/packages.vim
-endif
+"# vim-plug
+source ~/.config/nvim/packages.vim
 
 "# Options
 "## Colour scheme and font
-if has("nvim")
-    colorscheme catppuccin
-else
-    colorscheme dracula
-endif
+colorscheme gruvbox
 if g:os == "Linux"
-    set guifont=Iosevka\ Extended\ 11
+    set guifont=JetBrains\ Mono\ NL\ 11
 else
-    set guifont=Iosevka\ Extended:h11
+    set guifont=JetBrains\ Mono\ NL:h11
 endif
 
 "## GUI options
@@ -77,17 +58,12 @@ nmap <leader>fs :w<CR>
 nmap <leader>fS :w 
 
 "## Find files
-nmap <leader>ff :CtrlP<CR>
+nmap <leader>ff :CtrlP .<CR>
 nmap <leader>fr :CtrlPMRU<CR>
 
 "## Find private config
-if g:os == "Windows"
-	nmap <leader>fp :edit ~/vimfiles/vimrc<CR>
-	nmap <leader>fP :edit ~/vimfiles/<CR>
-else
-	nmap <leader>fp :edit ~/.vim/vimrc<CR>
-	nmap <leader>fP :edit ~/.vim/<CR>
-endif
+nmap <leader>fp :edit ~/.config/nvim/init.vim<CR>
+nmap <leader>fP :edit ~/.config/nvim/<CR>
 
 "## Quitting
 nmap q          :q<CR>
@@ -95,9 +71,7 @@ nmap <leader>qq :qa<CR>
 nmap <leader>qQ :qa!<CR>
 
 " Quitting terminal
-if has("nvim")
-    :tmap <Esc> <C-\><C-n>
-endif
+tmap <Esc> <C-\><C-n>
 
 "## Buffer switching
 nmap <leader>j  :bnext<CR>
@@ -110,21 +84,9 @@ nmap <leader>bw :bw<CR>
 nmap <leader>bW :bw!<CR>
 
 "## Reload
-if g:os == "Windows"
-    nmap <leader>rc :source ~/vimfiles/vimrc<CR>
-else
-    nmap <leader>rc :source ~/.vim/vimrc<CR>
-endif
-if g:os == "Windows"
-    nmap <leader>pp :source ~/vimfiles/packages.vim<CR>:PlugInstall<CR>
-else
-    nmap <leader>pp :source ~/.vim/packages.vim<CR>:PlugInstall<CR>
-endif
-if g:os == "Windows"
-    nmap <leader>pu :source ~/vimfiles/packages.vim<CR>:PlugUpdate<CR>
-else
-    nmap <leader>pu :source ~/.vim/packages.vim<CR>:PlugUpdate<CR>
-endif
+nmap <leader>rc :source ~/.config/nvim/init.vim<CR>
+nmap <leader>pp :source ~/.config/nvim/packages.vim<CR>:PlugInstall<CR>
+nmap <leader>pu :source ~/.config/nvim/packages.vim<CR>:PlugUpdate<CR>
 
 "## NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -156,6 +118,11 @@ imap <C-k> <C-o>"+D
 
 nmap <M-=> g<C-g>
 
+nmap <C-x>2 :vsplit<CR>
+nmap <C-x>3 :split<CR>
+imap <C-x>2 <C-o>:vsplit<CR>
+imap <C-x>3 <C-o>:split<CR>
+
 nnoremap y "+y
 vnoremap y "+y
 nnoremap p "+p
@@ -176,14 +143,12 @@ nmap <leader>w  <C-w>
 nmap <leader>cs :colorscheme 
 nmap <C-q> :Startify<CR>
 vnoremap <BS> d
-if has("nvim")
-    nmap <leader>ot :terminal<CR>
-endif
+nmap <leader>ot :terminal<CR>
 "# Airline
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_theme="dracula"
+let g:airline_theme="gruvbox"
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -200,21 +165,9 @@ let g:startify_lists = [
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	\ { 'type': 'commands',  'header': ['   Commands']       },
 	\ ]
-if g:os == "Windows"
-    let g:startify_commands = [
-        \ { 'v': ['Edit vimrc', ':edit ~/vimfiles/vimrc'] },
-        \ { 'p': ['Manage vim-plug packages', ':edit ~/vimfiles/packages.vim'] }
-        \ ]
-else
-    let g:startify_commands = [
-        \ { 'v': ['Edit vimrc', ':edit ~/.vim/vimrc'] },
-        \ { 'p': ['Manage vim-plug packages', ':edit ~/.vim/packages.vim'] }
-        \ ]
-endif
+let g:startify_commands = [
+    \ { 'v': ['Edit vimrc', ':edit ~/.config/nvim/init.vim'] },
+    \ { 'p': ['Manage vim-plug packages', ':edit ~/.config/nvim/packages.vim'] }
+    \ ]
 
-"# Encoding
-if !has('nvim')
-    set renderoptions=type:directx
-    set encoding=UTF-8
-endif
 
