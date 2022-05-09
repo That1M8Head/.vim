@@ -14,7 +14,7 @@ rem On Windows
 git clone git@github.com:That1M8Head/nvim.git %USERPROFILE%/.config/nvim/init.vim
 ```
 If you're on Windows, create an `init.vim` file at `%appdata%\nvim\` and write the following inside it:
-```sh
+```vim
 source ~/.config/nvim/init.vim
 ```
 
