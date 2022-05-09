@@ -11,7 +11,7 @@ git clone git@github.com:That1M8Head/nvim.git $HOME/.config/nvim/init.vim
 ```
 ```bat
 rem On Windows
-git clone git@github.com:That1M8Head/nvim.git /.config/nvim/init.vim
+git clone git@github.com:That1M8Head/nvim.git %USERPROFILE%/.config/nvim/init.vim
 ```
 If you're on Windows, create an `init.vim` file at `%appdata%\nvim\` and write the following inside it:
 ```sh
