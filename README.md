@@ -13,8 +13,10 @@ git clone git@github.com:That1M8Head/nvim.git $HOME/.config/nvim/init.vim
 rem On Windows
 git clone git@github.com:That1M8Head/nvim.git %USERPROFILE%/.config/nvim/init.vim
 ```
-If you're on Windows, create an `init.vim` file at `%appdata%\nvim\` and write the following inside it:
+If you're on Windows, create an `init.vim` file at `%localappdata%\nvim\` and write the following inside it:
 ```vim
+set runtimepath^=~/.config/nvim/ runtimepath+=~/.config/nvim/after
+let &packpath = &runtimepath
 source ~/.config/nvim/init.vim
 ```
 
